@@ -10,4 +10,3 @@ python3 -m py_compile "$pyfile"
 mv "__pycache__/$pycfile" .
 
 rm -rf "__pycache__"
-
