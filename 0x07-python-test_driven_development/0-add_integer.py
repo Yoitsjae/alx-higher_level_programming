@@ -1,26 +1,25 @@
 #!/usr/bin/python3
-"""
-Module: 0-add_integer
-
-Description:
-    This module contains a function that adds two integers.
 
 """
+Add Integer Module
 
+This module contains a function to add two integers.
+
+"""
 
 def add_integer(a, b=98):
     """
-    Adds two integers.
+    Add two integers.
 
     Args:
         a (int): The first integer.
-        b (int): The second integer. Defaults to 98.
+        b (int): The second integer (default is 98).
 
     Returns:
-        int: The sum of `a` and `b`.
+        int: The addition of a and b.
 
     Raises:
-        TypeError: If `a` or `b` is not an integer or float.
+        TypeError: If a or b is not an integer or float.
 
     """
 
