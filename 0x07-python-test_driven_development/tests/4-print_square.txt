@@ -1,0 +1,72 @@
+#!/usr/bin/python3
+
+"""
+This file contains test cases for the `print_square` function.
+"""
+
+import doctest
+from io import StringIO
+import sys
+from contextlib import redirect_stdout
+
+from print_square import print_square
+
+# Test cases
+test_cases = [
+    # Test case 1: Size = 4
+    {
+        "input": 4,
+        "expected_output": "####\n####\n####\n####\n"
+    },
+    # Test case 2: Size = 10
+    {
+        "input": 10,
+        "expected_output": "##########\n##########\n##########\n##########\n##########"
+                           "\n##########\n##########\n##########\n##########\n##########\n"
+    },
+    # Test case 3: Size = 0
+    {
+        "input": 0,
+        "expected_output": ""
+    },
+    # Test case 4: Size = 1
+    {
+        "input": 1,
+        "expected_output": "#\n"
+    },
+    # Test case 5: Invalid input - negative size
+    {
+        "input": -1,
+        "expected_output": "ValueError: size must be >= 0\n"
+    },
+    # Test case 6: Invalid input - size as a float
+    {
+        "input": 2.5,
+        "expected_output": "TypeError: size must be an integer\n"
+    },
+]
+
+# Run the test cases
+for test_case in test_cases:
+    input_args = test_case["input"]
+    expected_output = test_case["expected_output"]
+
+    # Redirect stdout to capture the output
+    stdout = StringIO()
+    with redirect_stdout(stdout):
+        print_square(input_args)
+
+    # Get the captured output
+    output = stdout.getvalue()
+
+    # Compare the output with the expected output
+    if output == expected_output:
+        print("Test passed")
+    else:
+        print("Test failed")
+        print(f"Input: {input_args}")
+        print(f"Expected output: {expected_output.strip()}")
+        print(f"Actual output: {output.strip()}")
+
+# Run doctest to check the function against the provided examples
+doctest.testmod()

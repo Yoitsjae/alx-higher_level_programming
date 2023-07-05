@@ -1,0 +1,80 @@
+#!/usr/bin/python3
+
+"""
+This file contains test cases for the `text_indentation` function.
+"""
+
+import doctest
+from io import StringIO
+import sys
+from contextlib import redirect_stdout
+
+from text_indentation import text_indentation
+
+# Test cases
+test_cases = [
+    # Test case 1: Text with ., ?, and :
+    {
+        "input": """Lorem ipsum dolor sit amet, consectetur adipiscing elit. \
+    Quonam modo? Utrum igitur tibi litteram videor an totas paginas commovere? \
+    Non autem hoc: igitur ne illud quidem. Fortasse id optimum, sed ubi illud: \
+    Plus semper voluptatis? Teneo, inquit, finem illi videri nihil dolere. \
+    Transfer idem ad modestiam vel temperantiam, quae est moderatio cupiditatum \
+    rationi oboediens. Si id dicis, vicimus. Inde sermone vario sex illa a Dipylo \
+    stadia confecimus. Sin aliud quid voles, postea. Quae animi affectio suum \
+    cuique tribuens atque hanc, quam dico. Utinam quidem dicerent alium alio \
+    beatiorem! Iam ruinas videres""",
+        "expected_output": """Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+    Quonam modo?
+
+    Utrum igitur tibi litteram videor an totas paginas commovere?
+
+    Non autem hoc:
+    igitur ne illud quidem.
+
+    Fortasse id optimum, sed ubi illud:
+
+    Plus semper voluptatis?
+
+    Teneo, inquit, finem illi videri nihil dolere.
+
+    Transfer idem ad modestiam vel temperantiam, quae est moderatio cupiditatum rationi oboediens.
+
+    Si id dicis, vicimus.
+
+    Inde sermone vario sex illa a Dipylo stadia confecimus.
+
+    Sin aliud quid voles, postea.
+
+    Quae animi affectio suum cuique tribuens atque hanc, quam dico.
+
+    Utinam quidem dicerent alium alio beatiorem! Iam ruinas videres"""
+    },
+    # Test case 2: Empty text
+    {
+        "input": "",
+        "expected_output": ""
+    },
+    # Test case 3: Text without ., ?, and :
+    {
+        "input": "This is a test text without any special characters",
+        "expected_output": "This is a test text without any special characters"
+    }
+]
+
+for idx, test_case in enumerate(test_cases):
+    input_text = test_case["input"]
+    expected_output = test_case["expected_output"]
+
+    # Redirect stdout to capture the printed output
+    stdout = StringIO()
+    with redirect_stdout(stdout):
+        text_indentation(input_text)
+
+    # Get the printed output
+    output = stdout.getvalue().strip()
+
+    # Compare the printed output with the expected output
+    assert output == expected_output, f"Test case {idx + 1} failed"
+
+print("All test cases passed!")
