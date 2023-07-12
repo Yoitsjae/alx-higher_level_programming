@@ -1,6 +1,8 @@
-#!/usr/bin/python3
+#!/usr/bin/env python3
 
 def read_file(filename=""):
     with open(filename, 'r', encoding='utf-8') as file:
-        content = file.read()
-        print(content, end="")
+        print(file.read(), end='')
+
+if __name__ == '__main__':
+    read_file("my_file_0.txt")
