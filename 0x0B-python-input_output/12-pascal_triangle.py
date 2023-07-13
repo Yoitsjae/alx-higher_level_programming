@@ -1,35 +1,21 @@
 #!/usr/bin/python3
-
-import json
-
-
-class Student:
-    def __init__(self, first_name, last_name, age):
-        self.first_name = first_name
-        self.last_name = last_name
-        self.age = age
-
-    def to_json_string(self):
-        return json.dumps(self.__dict__)
-
-    def save_to_json_file(self, filename):
-        with open(filename, 'w', encoding='utf-8') as file:
-            file.write(self.to_json_string())
-
-    def update_from_json_string(self, json_string):
-        data = json.loads(json_string)
-        self.first_name = data['first_name']
-        self.last_name = data['last_name']
-        self.age = data['age']
+"""Defines a Pascal's Triangle function."""
 
 
-if __name__ == '__main__':
-    student = Student("John", "Doe", 20)
-    student.save_to_json_file("student.json")
+def pascal_triangle(n):
+    """Represent Pascal's Triangle of size n.
 
-    # Update student from JSON string
-    json_string = '{"first_name": "Jane", "last_name": "Smith", "age": 22}'
-    student.update_from_json_string(json_string)
-    print(student.first_name)
-    print(student.last_name)
-    print(student.age)
+    Returns a list of lists of integers representing the triangle.
+    """
+    if n <= 0:
+        return []
+
+    triangles = [[1]]
+    while len(triangles) != n:
+        tri = triangles[-1]
+        tmp = [1]
+        for i in range(len(tri) - 1):
+            tmp.append(tri[i] + tri[i + 1])
+        tmp.append(1)
+        triangles.append(tmp)
+    return triangles

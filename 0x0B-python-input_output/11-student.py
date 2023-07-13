@@ -1,23 +1,41 @@
 #!/usr/bin/python3
+"""Defines a class Student."""
 
-import json
 
-class Square:
-    def __init__(self, size=0):
-        self.size = size
+class Student:
+    """Represent a student."""
 
-    def to_dictionary(self):
-        return {
-            'size': self.size
-        }
+    def __init__(self, first_name, last_name, age):
+        """Initialize a new Student.
 
-    def to_json_string(self):
-        return json.dumps(self.to_dictionary())
+        Args:
+            first_name (str): The first name of the student.
+            last_name (str): The last name of the student.
+            age (int): The age of the student.
+        """
+        self.first_name = first_name
+        self.last_name = last_name
+        self.age = age
 
-    def save_to_json_file(self, filename):
-        with open(filename, 'w', encoding='utf-8') as file:
-            file.write(self.to_json_string())
+    def to_json(self, attrs=None):
+        """Get a dictionary representation of the Student.
 
-if __name__ == '__main__':
-    square = Square(5)
-    square.save_to_json_file("square.json")
+        If attrs is a list of strings, represents only those attributes
+        included in the list.
+
+        Args:
+            attrs (list): (Optional) The attributes to represent.
+        """
+        if (type(attrs) == list and
+                all(type(ele) == str for ele in attrs)):
+            return {k: getattr(self, k) for k in attrs if hasattr(self, k)}
+        return self.__dict__
+
+    def reload_from_json(self, json):
+        """Replace all attributes of the Student.
+
+        Args:
+            json (dict): The key/value pairs to replace attributes with.
+        """
+        for k, v in json.items():
+            setattr(self, k, v)

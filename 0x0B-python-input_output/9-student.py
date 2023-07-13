@@ -1,25 +1,22 @@
 #!/usr/bin/python3
+"""Defines a class Student."""
 
-import json
 
-def to_dictionary(json_string):
-    return json.loads(json_string)
+class Student:
+    """Represent a student."""
 
-if __name__ == '__main__':
-    s_student_1 = '{"first_name": "John", "last_name": "Doe", "age": 20}'
-    student_1_dict = to_dictionary(s_student_1)
-    print(student_1_dict)
-    print(type(student_1_dict))
+    def __init__(self, first_name, last_name, age):
+        """Initialize a new Student.
 
-    s_student_2 = '{"first_name": "Jane", "last_name": "Smith", "age": 22}'
-    student_2_dict = to_dictionary(s_student_2)
-    print(student_2_dict)
-    print(type(student_2_dict))
+        Args:
+            first_name (str): The first name of the student.
+            last_name (str): The last name of the student.
+            age (int): The age of the student.
+        """
+        self.first_name = first_name
+        self.last_name = last_name
+        self.age = age
 
-    try:
-        s_invalid_json = '{"first_name": "Jack", "last_name": "Brown", "age"}'
-        invalid_dict = to_dictionary(s_invalid_json)
-        print(invalid_dict)
-        print(type(invalid_dict))
-    except Exception as e:
-        print("[{}] {}".format(e.__class__.__name__, e))
+    def to_json(self):
+        """Get a dictionary representation of the Student."""
+        return self.__dict__
