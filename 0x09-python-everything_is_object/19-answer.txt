@@ -1,0 +1,8 @@
+#!/usr/bin/python3
+
+my_list = [1, 2, 3]
+new_list = copy_list(my_list)
+print(my_list)  # Should print [1, 2, 3]
+print(new_list)  # Should print [1, 2, 3]
+print(new_list == my_list)  # Should print True
+print(new_list is my_list)  # Should print False
