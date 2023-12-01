@@ -7,7 +7,7 @@ import urllib.request
 
 def main():
     """
-    funtion to print a response of a specific URL
+    Funtion to print a response of a specific URL
     """
     url = 'https://intranet.hbtn.io/status'
     with urllib.request.urlopen(url) as response:
